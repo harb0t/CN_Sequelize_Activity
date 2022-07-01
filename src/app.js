@@ -1,6 +1,6 @@
 const yargs = require("yargs");
 const { sequelize } = require("./db/connection");
-const { addMovie, listMovies, deleteMovie }= require("./movie/functions");
+const { addMovie, listMovies, deleteMovie, updateMovie }= require("./movie/functions");
 
 //use async and wait(await) as we want to make sure this is done before moving on
 const app = async (yargsObj) =>{
@@ -11,15 +11,28 @@ const app = async (yargsObj) =>{
         //
         if (yargsObj.add) {
             //add something to movie table
-            await addMovie ({title: yargsObj.title, actor: yargsObj.actor})
+            await addMovie ({title: yargsObj.title, actor: yargsObj.actor});
+
+
+
         } else if (yargsObj.list) {
             //list contents of movie table
-            await listMovies({title: yargsObj.title, actor: yargsObj.actor});
+            await listMovies({});
+
+
+
         } else if (yargsObj.update) {
-            //update one entry in movie table
+            //update entry in movie table
+            await updateMovie({title: yargsObj.title}, {title: yargsObj.newtitle, actor: yargsObj.newactor});
+
+
+        
         } else if (yargsObj.delete) {
-            await deleteMovie ({title: yargsObj.title})
             //delte object from movie table
+            await deleteMovie ({title: yargsObj.title});
+
+
+
         } else {
             console.log("incorrect command");
         }

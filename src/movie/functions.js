@@ -9,7 +9,7 @@ exports.addMovie = async (movieObj) => {
     }
 };
 
-exports.listMovies = async (movieObj) => {
+exports.listMovies = async () => {
     try {
         const response = await Movie.findAll();
         console.log(response);
@@ -20,8 +20,17 @@ exports.listMovies = async (movieObj) => {
 
 exports.deleteMovie = async (movieObj) => {
     try {
-        const response = await Movie.destroy(movieObj);
+        const response = await Movie.destroy({where: movieObj});
         console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+exports.updateMovie = async(filterObj, newDetails) => {
+    try {
+        const response = await Movie.update({title: newDetails.title, actor: newDetails.actor}, {where: {title: filterObj.title}});
+        return response;
     } catch (error) {
         console.log(error);
     }
