@@ -30,6 +30,7 @@ exports.deleteMovie = async (movieObj) => {
 exports.updateMovie = async(filterObj, newDetails) => {
     try {
         const response = await Movie.update({title: newDetails.title, actor: newDetails.actor}, {where: {title: filterObj.title}});
+        console.log(response);
         return response;
     } catch (error) {
         console.log(error);

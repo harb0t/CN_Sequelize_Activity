@@ -6,7 +6,7 @@ const { addMovie, listMovies, deleteMovie, updateMovie }= require("./movie/funct
 const app = async (yargsObj) =>{
     try {
         // go back and try and understand below line
-        // calls on function then dot notation runs method?
+        // calls on function then dot notation runs method? **research
         await sequelize.sync({alter: true});
         //
         if (yargsObj.add) {
